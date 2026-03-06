@@ -6,7 +6,7 @@
 #define SE226LABS_TASK1_H
 
 
-class task1 {
+class lab2 {
 };
 
 
