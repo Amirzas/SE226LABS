@@ -1,3 +1,18 @@
+print("9 dan büyük bir sayı giriniz")
+x=int(input())
+step=0
+while x>9:
+ temp=x
+ toplam=0
+ while temp>0:
+     kalan=temp%10
+     toplam +=kalan
+     temp //=10
+ x=toplam
+ step+=1
+print("Final value:", x)
+print("Total steps:", step)
+
 print("lütfen 10 ile 100 arasında bir sayı girin")
 num=int(input())
 fizz_count = 0
@@ -32,3 +47,24 @@ print("--- Summary ---")
 print("Fizz count :", fizz_count)
 print("Buzz count :", buzz_count)
 print("FizzBuzz count:", fizzbuzz_count)
+
+n = int(input("Lütfen 3 ile 9 arasında bir sayı girin: "))
+
+while n < 3 or n > 9:
+    n = int(input("Lütfen 3 ile 9 arasında bir sayı girin: "))
+
+k = 1
+direction = 1
+
+while k > 0:
+    i = 1
+    while i <= k:
+        print(i, end="")
+        i += 1
+
+    print()
+
+    if k == n:
+        direction = -1
+
+    k += direction
