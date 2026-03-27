@@ -13,14 +13,15 @@ print("\nUSER DATA:")
 for user, items in users.items():
  print(user+" -> "+str(items))
 
- all_items = []
+all_items = []
 for items in users.values():
-     all_items.extend(items)
+    all_items.extend(items)
 unique_set = set(all_items)
 common_items = []
 unique_items = []
 for item in unique_set:
-    if all_items.count(item) > 1:
+    user_count = sum(1 for items in users.values() if item in items)
+    if user_count > 1:
         common_items.append(item)
     else:
         unique_items.append(item)
