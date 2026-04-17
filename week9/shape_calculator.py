@@ -1,28 +1,41 @@
 import geometry_utils
 
-shape_area = {
-    "circle":    geometry_utils.circle_area,
-    "rectangle": geometry_utils.rectangle_area,
-    "triangle":  geometry_utils.triangle_area,
+shape_functions = {
+    "circle_area":         geometry_utils.circle_area,
+    "circle_perimeter":    geometry_utils.circle_perimeter,
+    "rectangle_area":      geometry_utils.rectangle_area,
+    "rectangle_perimeter": geometry_utils.rectangle_perimeter,
+    "triangle_area":       geometry_utils.triangle_area,
+}
+
+shape_inputs = {
+    "circle_area":         ["radius"],
+    "circle_perimeter":    ["radius"],
+    "rectangle_area":      ["width", "height"],
+    "rectangle_perimeter": ["width", "height"],
+    "triangle_area":       ["base", "height"],
 }
 
 print("Available shapes: circle, rectangle, triangle")
-shape = input("Enter shape type: ").strip().lower()
+print("Available calculations: _area, _perimeter (e.g., circle_area)")
 
-if shape not in shape_area:
-    print("Input Error: Invalid shape.")
+operation = input("Enter the operation you want to perform: ").strip().lower()
+
+if operation not in shape_functions:
+    print("Input Error: Invalid operation.")
 else:
-    if shape == "circle":
-        radius = float(input("Enter radius: "))
-        result = shape_area[shape](radius)
-    elif shape == "rectangle":
-        width = float(input("Enter width: "))
-        height = float(input("Enter height: "))
-        result = shape_area[shape](width, height)
-    elif shape == "triangle":
-        base = float(input("Enter base: "))
-        height = float(input("Enter height: "))
-        result = shape_area[shape](base, height)
+    dims = []
+    valid = True
+    for dim_name in shape_inputs[operation]:
+        value = input(f"Enter {dim_name}: ")
+        if value.lstrip("-").replace(".", "").isdigit():
+            dims.append(float(value))
+        else:
+            print("Input Error: Please enter a valid number.")
+            valid = False
+            break
 
-    if result is not None:
-        print(f"Area: {result}")
+    if valid:
+        result = shape_functions[operation](*dims)
+        if result is not None:
+            print(f"Result: {result}")
